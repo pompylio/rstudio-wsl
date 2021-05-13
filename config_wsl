@@ -3,6 +3,7 @@
 ## Adicionar repositorio CRAN
 sudo apt-get update
 sudo apt-get upgrade -y
+apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9
 sudo add-apt-repository 'deb https://cloud.r-project.org/bin/linux/ubuntu focal-cran40/'
 sudo apt-get update
 
@@ -26,11 +27,9 @@ sudo chmod -R 777 /srv
 git config --global user.name "Pompylio"
 git config --global user.email "pompylio.lima@gmail.com"
 
-sudo su - -c "R -e \"install.packages(c('usethis'))\""
-sudo su - -c "R -e \"install.packages(c('devtools'))\""
 sudo su - -c "R -e \"install.packages(c('tidyverse'), INSTALL_opts = '--no-lock')\""
-sudo su - -c "R -e \"install.packages(c('rmarkdown'))\""
-sudo su - -c "R -e \"install.packages(c('kableExtra', 'flextable'))\""
+sudo su - -c "R -e \"install.packages(c('devtools'))\""
+sudo su - -c "R -e \"install.packages(c('gmailr','flextable'))\""
 sudo su - -c "R -e \"install.packages(c('shinycssloaders','shinydashboard','shinydashboardPlus','shinyjs','shinymanager','shinyWidgets'))\""
-sudo su - -c "R -e \"install.packages(c('gmailr'))\""
 
+rstudio-server start

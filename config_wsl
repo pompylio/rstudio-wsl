@@ -1,13 +1,27 @@
 ## wsl Ubuntu20-04 (focal)
 
+## Adicionar repositorio CRAN
 sudo apt-get update
 sudo apt-get upgrade -y
 sudo add-apt-repository 'deb https://cloud.r-project.org/bin/linux/ubuntu focal-cran40/'
 sudo apt-get update
+
+## Instalar bibliotecas
 sudo apt install -y r-base r-base-core r-recommended r-base-dev gdebi-core build-essential libcurl4-gnutls-dev libxml2-dev libssl-dev libfontconfig1-dev libcairo2-dev git
+
+## Instalar Rstudio Server
 cd /home
 wget --no-check-certificate https://download2.rstudio.org/server/bionic/amd64/rstudio-server-1.4.1106-amd64.deb
 sudo gdebi rstudio-server-1.4.1106-amd64.deb
+
+## Instalar Shiny Server
+vi /etc/R/Renviron
+# Substituir R_LIBS_USER=${R_LIBS_USER-'~/R/x86_64-pc-linux-gnu-library/4.0'} por R_LIBS_USER=${R_LIBS_USER-'/usr/lib/R/site-library'}
+sudo chmod 777 /usr/lib/R/site-library
+sudo su - -c "R -e \"install.packages(c('shiny'))\""
+wget --no-check-certificate https://download3.rstudio.org/ubuntu-14.04/x86_64/shiny-server-1.5.16.958-amd64.deb
+sudo gdebi shiny-server-1.5.16.958-amd64.deb
+sudo chmod -R 777 /srv
 
 git config --global user.name "Pompylio"
 git config --global user.email "pompylio.lima@gmail.com"
@@ -17,6 +31,6 @@ sudo su - -c "R -e \"install.packages(c('devtools'))\""
 sudo su - -c "R -e \"install.packages(c('tidyverse'), INSTALL_opts = '--no-lock')\""
 sudo su - -c "R -e \"install.packages(c('rmarkdown'))\""
 sudo su - -c "R -e \"install.packages(c('kableExtra', 'flextable'))\""
-sudo su - -c "R -e \"install.packages(c('shiny', 'shinycssloaders','shinydashboard','shinydashboardPlus','shinyjs','shinymanager','shinyWidgets'))\""
+sudo su - -c "R -e \"install.packages(c('shinycssloaders','shinydashboard','shinydashboardPlus','shinyjs','shinymanager','shinyWidgets'))\""
 sudo su - -c "R -e \"install.packages(c('gmailr'))\""
 

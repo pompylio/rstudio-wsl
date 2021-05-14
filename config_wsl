@@ -24,16 +24,20 @@ wget --no-check-certificate https://download3.rstudio.org/ubuntu-14.04/x86_64/sh
 sudo gdebi shiny-server-1.5.16.958-amd64.deb
 sudo chmod -R 777 /srv
 
-git config --global user.name "Pompylio"
-git config --global user.email "pompylio.lima@gmail.com"
-
+## Instalar pacotes R
 sudo su - -c "R -e \"install.packages(c('tidyverse'), INSTALL_opts = '--no-lock')\""
 sudo su - -c "R -e \"install.packages(c('devtools'))\""
 sudo su - -c "R -e \"install.packages(c('gmailr','flextable'))\""
 sudo su - -c "R -e \"install.packages(c('shinycssloaders','shinydashboard','shinydashboardPlus','shinyjs','shinymanager','shinyWidgets'))\""
 
+## Configurar GIT
+git config --global user.name "Pompylio"
+git config --global user.email "pompylio.lima@gmail.com"
+
+## Instalar tinytex para exportar latex/pdf
 tinytex::install_tinytex()
 
+## Configurar permissões shiny
 sudo groupadd shiny-apps
 sudo usermod -aG shiny-apps pompylio
 sudo usermod -aG shiny-apps shiny
@@ -42,4 +46,8 @@ sudo chown -R pompylio:shiny-apps .
 sudo chmod -R g+w .
 sudo chmod -R g+s .
 
+## Iniciar rstudio-server
 rstudio-server start
+
+## Criar arquivo de configuração
+usethis::edit_r_environ("user")

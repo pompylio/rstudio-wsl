@@ -32,4 +32,14 @@ sudo su - -c "R -e \"install.packages(c('devtools'))\""
 sudo su - -c "R -e \"install.packages(c('gmailr','flextable'))\""
 sudo su - -c "R -e \"install.packages(c('shinycssloaders','shinydashboard','shinydashboardPlus','shinyjs','shinymanager','shinyWidgets'))\""
 
+tinytex::install_tinytex()
+
+sudo groupadd shiny-apps
+sudo usermod -aG shiny-apps pompylio
+sudo usermod -aG shiny-apps shiny
+cd /srv/shiny-server
+sudo chown -R pompylio:shiny-apps .
+sudo chmod -R g+w .
+sudo chmod -R g+s .
+
 rstudio-server start

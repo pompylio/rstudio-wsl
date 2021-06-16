@@ -1,0 +1,14 @@
+## Abrir PowerShell como administrador e crie o arquivo para o script
+echo "" > $HOME\run_wsl.vbs
+notepad $HOME\run_wsl.vbs
+
+## Verifique a versão da distribuição
+wsl -l -v
+
+## Se a versão do wsl for 1, altere para 2, antes faça um backup da versão atual
+wsl --export Ubuntu-20.04 D:\WSL\rstudio-ubuntu-lts.tar
+wsl --set-version Ubuntu-20.04 2
+
+## Adicione no arquivo pelo notepad o comando, de acordo com a versão da distribuição
+set object = createobject("wscript.shell") 
+object.run "wsl.exe --distribution Ubuntu-20.04", 0

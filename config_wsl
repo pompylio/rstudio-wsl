@@ -31,8 +31,12 @@ sudo su - -c "R -e \"install.packages(c('gmailr','flextable'))\""
 sudo su - -c "R -e \"install.packages(c('shinycssloaders','shinydashboard','shinydashboardPlus','shinyjs','shinymanager','shinyWidgets'))\""
 
 ## Configurar GIT
-git config --global user.name "Pompylio"
-git config --global user.email "pompylio.lima@gmail.com"
+usethis::use_git_config(user.name = "Pompylio", user.email = "pompylio.lima@gmail.com")
+usethis::create_github_token() 
+credentials::set_github_pat("YourPAT")
+usethis::edit_r_environ() ## store your personal access token with: GITHUB_PAT=xxxyyyzzz
+usethis::git_sitrep()
+
 
 ## Instalar tinytex para exportar latex/pdf
 tinytex::install_tinytex()
